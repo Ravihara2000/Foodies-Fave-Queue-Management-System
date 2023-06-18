@@ -3,29 +3,34 @@ import java.util.Scanner;
 public class Main {
     static Scanner scn = new Scanner(System.in);
 
-    static String [] array1 = {"O","O"};
-    static String [] array2 = {"X","O","O"};
-    static String [] array3 = {"O","O","O","O","O"};
+    static String[] array1 = {"O", "O"};
+    static String[] array2 = {"O", "O", "O"};
+    static String[] array3 = {"O", "O", "O", "O", "O"};
+
     public static void main(String[] args) {
-        int x=0;
+        int x = 0;
 
 
-        while(x<1){
+        while (x < 1) {
             displayMenu();
 
             System.out.println("Enter Your Option  :");
             String opt = scn.next();
-            opt=opt.toUpperCase();
+            opt = opt.toUpperCase();
 
-            switch (opt){
+            switch (opt) {
                 case "100":
                 case "VFQ":
                     viewAllQueues();
+                    break;
                 case "101":
                 case "VEQ":
                     viewEmptyQueues();
+                    break;
                 case "102":
                 case "ACQ":
+                    addCustomers();
+                    break;
                 case "103":
                 case "RCQ":
                 case "104":
@@ -49,7 +54,7 @@ public class Main {
 
     }
 
-    public static void displayMenu(){
+    public static void displayMenu() {
         System.out.println("\n100 or VFQ: View all Queues.\n" +
                 "101 or VEQ: View all Empty Queues.\n" +
                 "102 or ACQ: Add customer to a Queue.\n" +
@@ -64,7 +69,7 @@ public class Main {
         System.out.println("-------------------------------------");
     }
 
-    public static void viewAllQueues(){
+    public static void viewAllQueues() {
         System.out.println("*****************");
         System.out.println("*\tCashiers\t*");
         System.out.println("*****************");
@@ -93,27 +98,68 @@ public class Main {
 
     }
 
-    public static void viewEmptyQueues(){
+    public static void viewEmptyQueues() {
 
-        if(array1[0]=="O"){
+        if (array1[0] == "O") {
             System.out.println("Cashier 1 is empty");
-        }
-        else{
+        } else {
             System.out.println("Cashier 1 is busy");
         }
 
-        if(array2[0]=="O"){
+        if (array2[0] == "O") {
             System.out.println("Cashier 2 is empty");
-        }
-        else{
+        } else {
             System.out.println("Cashier 2 is busy");
         }
 
-        if(array3[0]=="O"){
+        if (array3[0] == "O") {
             System.out.println("Cashier 3 is empty");
-        }
-        else{
+        } else {
             System.out.println("Cashier 3 is busy");
+        }
+    }
+
+    public static void addCustomers() {
+        int count1 = 0;
+        int count2 = 0;
+        int count3 = 0;
+        try {
+
+            System.out.println("Enter customer name  :");
+            String cusName = scn.next();
+
+            if (array1[0] == "O") {
+                array1[0] = "X";
+                System.out.println("Customer added to queue 1");
+            } else if (array2[0] == "O") {
+                array2[0] = "X";
+                System.out.println("Customer added to queue 2");
+            } else if (array3[0] == "O") {
+                array3[0] = "X";
+                System.out.println("Customer added to queue 3");
+            } else {
+
+                for (int i = 1; i < 5; i++) {
+                    if (array1[i] == "O") {
+                        array1[i] = "X";
+                        System.out.println("Customer added to queue 1");
+                        break;
+                    } else if (array2[i] == "O") {
+                        array2[i] = "X";
+                        System.out.println("Customer added to queue 2");
+                        break;
+                    } else if (array3[i] == "O") {
+                        array3[i] = "X";
+                        System.out.println("Customer added to queue 3");
+                        break;
+                    } else {
+                        System.out.println("All queues are full");
+                    }
+                }
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 }
