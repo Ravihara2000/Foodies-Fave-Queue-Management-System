@@ -4,7 +4,7 @@ public class Main {
     static Scanner scn = new Scanner(System.in);
 
     static String [] array1 = {"O","O"};
-    static String [] array2 = {"O","O","O"};
+    static String [] array2 = {"X","O","O"};
     static String [] array3 = {"O","O","O","O","O"};
     public static void main(String[] args) {
         int x=0;
@@ -13,7 +13,7 @@ public class Main {
         while(x<1){
             displayMenu();
 
-            System.out.println("Enter Your Option  :\n");
+            System.out.println("Enter Your Option  :");
             String opt = scn.next();
             opt=opt.toUpperCase();
 
@@ -23,6 +23,7 @@ public class Main {
                     viewAllQueues();
                 case "101":
                 case "VEQ":
+                    viewEmptyQueues();
                 case "102":
                 case "ACQ":
                 case "103":
@@ -90,5 +91,29 @@ public class Main {
         }
 
 
+    }
+
+    public static void viewEmptyQueues(){
+
+        if(array1[0]=="O"){
+            System.out.println("Cashier 1 is empty");
+        }
+        else{
+            System.out.println("Cashier 1 is busy");
+        }
+
+        if(array2[0]=="O"){
+            System.out.println("Cashier 2 is empty");
+        }
+        else{
+            System.out.println("Cashier 2 is busy");
+        }
+
+        if(array3[0]=="O"){
+            System.out.println("Cashier 3 is empty");
+        }
+        else{
+            System.out.println("Cashier 3 is busy");
+        }
     }
 }
