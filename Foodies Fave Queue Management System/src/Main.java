@@ -10,6 +10,8 @@ public class Main {
     static String[] cusNameArray2={};
     static String[] cusNameArray3={};
 
+    static int burgerAmount=50;
+
     public static void main(String[] args) {
         int x = 0;
 
@@ -50,8 +52,12 @@ public class Main {
                 case "LPD":
                 case "108":
                 case "STK":
+                    viewRemainingBurgers();
+                    break;
                 case "109":
                 case "AFS":
+                    addBurgersStock();
+                    break;
                 case "999":
                 case "EXT":
                     System.exit(0);
@@ -235,15 +241,34 @@ public class Main {
 
             if(cashNum==1){
                 array1[0]="O";
+                burgerAmount-=5;
+                System.out.println("Removed the served customer");
             }
             if(cashNum==2){
                 array2[0]="O";
+                burgerAmount-=5;
+                System.out.println("Removed the served customer");
             }
             if(cashNum==3){
                 array3[0]="O";
+                burgerAmount-=5;
+                System.out.println("Removed the served customer");
             }
         }catch (Exception e){
             System.out.println(e);
         }
     }
+
+    public static void viewRemainingBurgers(){
+        System.out.printf("You have remaining %d burgers",burgerAmount);
+    }
+
+    public static void addBurgersStock(){
+        System.out.println("How many burgers you want to add to the stock  :");
+        int amnt = scn.nextInt();
+
+        burgerAmount= burgerAmount+amnt;
+        System.out.println("Burger stocks updated");
+    }
+
 }
