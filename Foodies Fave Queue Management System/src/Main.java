@@ -1,19 +1,26 @@
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scn = new Scanner(System.in);
+
+    static String [] array1 = {"O","O"};
+    static String [] array2 = {"O","O","O"};
+    static String [] array3 = {"O","O","O","O","O"};
     public static void main(String[] args) {
         int x=0;
-        Scanner scn = new Scanner(System.in);
+
 
         while(x<1){
             displayMenu();
-            System.out.println("Enter Your Option  \n");
+
+            System.out.println("Enter Your Option  :\n");
             String opt = scn.next();
             opt=opt.toUpperCase();
 
             switch (opt){
                 case "100":
                 case "VFQ":
+                    viewAllQueues();
                 case "101":
                 case "VEQ":
                 case "102":
@@ -42,7 +49,7 @@ public class Main {
     }
 
     public static void displayMenu(){
-        System.out.println("100 or VFQ: View all Queues.\n" +
+        System.out.println("\n100 or VFQ: View all Queues.\n" +
                 "101 or VEQ: View all Empty Queues.\n" +
                 "102 or ACQ: Add customer to a Queue.\n" +
                 "103 or RCQ: Remove a customer from a Queue. (From a specific location)\n" +
@@ -54,5 +61,34 @@ public class Main {
                 "109 or AFS: Add burgers to Stock.\n" +
                 "999 or EXT: Exit the Program");
         System.out.println("-------------------------------------");
+    }
+
+    public static void viewAllQueues(){
+        System.out.println("*****************");
+        System.out.println("*\tCashiers\t*");
+        System.out.println("*****************");
+        int maxLength = Math.max(Math.max(array1.length, array2.length), array3.length);
+
+        for (int i = 0; i < maxLength; i++) {
+            if (i < array1.length) {
+                System.out.print(array1[i] + "\t");
+            } else {
+                System.out.print("\t");
+            }
+
+            if (i < array2.length) {
+                System.out.print(array2[i] + "\t");
+            } else {
+                System.out.print("\t");
+            }
+
+            if (i < array3.length) {
+                System.out.print(array3[i]);
+            }
+
+            System.out.println();
+        }
+
+
     }
 }
