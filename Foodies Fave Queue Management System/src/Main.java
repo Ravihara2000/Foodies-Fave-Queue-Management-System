@@ -6,6 +6,9 @@ public class Main {
     static String[] array1 = {"O", "O"};
     static String[] array2 = {"O", "O", "O"};
     static String[] array3 = {"O", "O", "O", "O", "O"};
+    static String[] cusNameArray1={};
+    static String[] cusNameArray2={};
+    static String[] cusNameArray3={};
 
     public static void main(String[] args) {
         int x = 0;
@@ -33,8 +36,12 @@ public class Main {
                     break;
                 case "103":
                 case "RCQ":
+                    removeCustomer();
+                    break;
                 case "104":
                 case "PCQ":
+                    removeServedCustomer();
+                    break;
                 case "105":
                 case "VCS":
                 case "106":
@@ -47,6 +54,7 @@ public class Main {
                 case "AFS":
                 case "999":
                 case "EXT":
+                    System.exit(0);
 
             }
 
@@ -120,9 +128,9 @@ public class Main {
     }
 
     public static void addCustomers() {
-        int count1 = 0;
+/*        int count1 = 0;
         int count2 = 0;
-        int count3 = 0;
+        int count3 = 0;*/
         try {
 
             System.out.println("Enter customer name  :");
@@ -130,12 +138,15 @@ public class Main {
 
             if (array1[0] == "O") {
                 array1[0] = "X";
+                cusNameArray1[0]=cusName;
                 System.out.println("Customer added to queue 1");
             } else if (array2[0] == "O") {
                 array2[0] = "X";
+                cusNameArray2[0]=cusName;
                 System.out.println("Customer added to queue 2");
             } else if (array3[0] == "O") {
                 array3[0] = "X";
+                cusNameArray3[0]=cusName;
                 System.out.println("Customer added to queue 3");
             } else {
 
@@ -158,6 +169,79 @@ public class Main {
                 }
             }
 
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public static void removeCustomer() {
+        int x=0;
+        try {
+            while(x<1) {
+                System.out.println("Enter Cashier Number :");
+                int cashNum = scn.nextInt();
+
+                System.out.println("Enter the position of the Queue  :");
+                int position = scn.nextInt();
+
+                if (cashNum == 1) {
+                    if (position - 1 < 2) {
+                        if (array1[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array1[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 2) {
+                    if (position - 1 < 3) {
+                        if (array2[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array2[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 3) {
+                    if (position - 1 < 5) {
+                        if (array3[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else if (array3[position - 1] == "X") {
+                            array3[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public static void removeServedCustomer(){
+        try{
+            System.out.println("Enter Cashier Number :");
+            int cashNum = scn.nextInt();
+
+            if(cashNum==1){
+                array1[0]="O";
+            }
+            if(cashNum==2){
+                array2[0]="O";
+            }
+            if(cashNum==3){
+                array3[0]="O";
+            }
         }catch (Exception e){
             System.out.println(e);
         }
