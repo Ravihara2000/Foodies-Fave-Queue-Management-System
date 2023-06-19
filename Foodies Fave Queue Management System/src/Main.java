@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     static Scanner scn = new Scanner(System.in);
 
-    static String[] array1 = {"O", "O"};
-    static String[] array2 = {"O", "O", "O"};
-    static String[] array3 = {"O", "O", "O", "O", "O"};
+    static String[] array1 = {"O", "O","O"};
+    static String[] array2 = {"O", "O", "O","O"};
+    static String[] array3 = {"O", "O", "O", "O", "O","O"};
     static String[] cusNameArray1=new String[2];
     static String[] cusNameArray2=new String[3];
     static String[] cusNameArray3=new String[5];
@@ -89,22 +89,22 @@ public class Main {
         System.out.println("*****************");
         System.out.println("*\tCashiers\t*");
         System.out.println("*****************");
-        int maxLength = Math.max(Math.max(array1.length, array2.length), array3.length);
 
-        for (int i = 0; i < maxLength; i++) {
-            if (i < array1.length) {
+
+        for (int i = 0; i < 10; i++) {
+            if (i < 2) {
                 System.out.print(array1[i] + "\t");
             } else {
                 System.out.print("\t");
             }
 
-            if (i < array2.length) {
+            if (i < 3) {
                 System.out.print(array2[i] + "\t");
             } else {
                 System.out.print("\t");
             }
 
-            if (i < array3.length) {
+            if (i < 5) {
                 System.out.print(array3[i]);
             }
 
@@ -138,16 +138,17 @@ public class Main {
     public static void addCustomers() {
         try {
             for (int v = 1; v > -1; v++) {
-                System.out.println("Enter Customer name  :");
-                String cName = scn.next();
-
                 System.out.println("Enter Queue number you wish to add customer(1-3) or Press 0 to come back to menu  :");
                 int qNum = scn.nextInt();
+
+
 
                 if (qNum == 1) {
                     if (array1[1] == "O") {
                         for (int i = 0; i < 2; i++) {
                             if (array1[i] == "O") {
+                                System.out.println("Enter Customer name  :");
+                                String cName = scn.next();
                                 array1[i] = "X";
                                 cusNameArray1[i] = cName;
                                 System.out.println(cusNameArray1[i] + " added to the queue 1");
@@ -165,6 +166,8 @@ public class Main {
                     if (array2[2] == "O") {
                         for (int i = 0; i < 3; i++) {
                             if (array2[i] == "O") {
+                                System.out.println("Enter Customer name  :");
+                                String cName = scn.next();
                                 array2[i] = "X";
                                 cusNameArray2[i] = cName;
                                 System.out.println(cusNameArray2[i] + " added to the queue 2");
@@ -181,6 +184,8 @@ public class Main {
                     if (array3[4] == "O") {
                         for (int i = 0; i < 5; i++) {
                             if (array3[i] == "O") {
+                                System.out.println("Enter Customer name  :");
+                                String cName = scn.next();
                                 array3[i] = "X";
                                 cusNameArray3[i] = cName;
                                 System.out.println(cusNameArray3[i] + " added to the queue 3");
