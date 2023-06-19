@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
@@ -9,8 +14,8 @@ public class Main {
     static String[] cusNameArray1=new String[2];
     static String[] cusNameArray2=new String[3];
     static String[] cusNameArray3=new String[5];
-
-    static int burgerAmount=13;
+    static File logFile = new File("cashier-data.txt");
+    static int burgerAmount=50;
 
     public static void main(String[] args) {
         int x = 0;
@@ -50,8 +55,12 @@ public class Main {
                     break;
                 case "106":
                 case "SPD":
+                    storeData();
+                    break;
                 case "107":
                 case "LPD":
+                    loadDataFromFile();
+                    break;
                 case "108":
                 case "STK":
                     viewRemainingBurgers();
@@ -329,24 +338,166 @@ public class Main {
 
     public static void sortedCustomer(){
         try{
-            String temp;
-            System.out.println("Strings in sorted order:");
-            for (int j = 0; j < cusNameArray1.length; j++) {
-                for (int i = j + 1; i < cusNameArray1.length; i++) {
-                    // comparing adjacent strings
-                    if (cusNameArray1[i].compareTo(cusNameArray1[j]) < 0) {
-                        temp = cusNameArray1[j];
-                        cusNameArray1[j] = cusNameArray1[i];
-                        cusNameArray1[i] = temp;
+            System.out.println("Which cashier do you wan to sort  :");
+            int cNum = scn.nextInt();
+
+            if(cNum==1){
+                String[] Q1temparray = new String[]{"O","O"};
+                int cnt = 0;
+                for (int y = 0; y < 2; y++) {
+                    if (cusNameArray1[y] != null) {
+                        Q1temparray[y] = cusNameArray1[y];
+                        cnt++;
                     }
                 }
-                System.out.println(cusNameArray1[j]);
-                System.out.println("Sorted");
+
+                String temp;
+                for (int i = 0; i < cnt; i++) {
+                    for (int j = i + 1; j < cnt; j++) {
+                        if (Q1temparray[i].compareTo(Q1temparray[j]) > 0) {
+                            temp = Q1temparray[i];
+                            Q1temparray[i] = Q1temparray[j];
+                            Q1temparray[j] = temp;
+                        }
+                    }
+                }
+                System.out.println("After sorted cashier 1  :");
+                for (String name : Q1temparray) {
+                    System.out.println(name);
+                }
+            }
+            else if(cNum==2){
+                String[] Q2temparray = new String[]{"O","O","O"};
+                int cnt = 0;
+                for (int y = 0; y < 3; y++) {
+                    if (cusNameArray2[y] != null) {
+                        Q2temparray[y] = cusNameArray2[y];
+                        cnt++;
+                    }
+                }
+
+                String temp;
+                for (int i = 0; i < cnt; i++) {
+                    for (int j = i + 1; j < cnt; j++) {
+                        if (Q2temparray[i].compareTo(Q2temparray[j]) > 0) {
+                            temp = Q2temparray[i];
+                            Q2temparray[i] = Q2temparray[j];
+                            Q2temparray[j] = temp;
+                        }
+                    }
+                }
+                System.out.println("After sorted cashier 2  :");
+                for (String name : Q2temparray) {
+                    System.out.println(name);
+                }
+            }else if(cNum==3){
+                String[] Q3temparray = new String[]{"O","O","O","O","O"};
+                int cnt = 0;
+                for (int y = 0; y < 5; y++) {
+                    if (cusNameArray3[y] != null) {
+                        Q3temparray[y] = cusNameArray3[y];
+                        cnt++;
+                    }
+                }
+
+                String temp;
+                for (int i = 0; i < cnt; i++) {
+                    for (int j = i + 1; j < cnt; j++) {
+                        if (Q3temparray[i].compareTo(Q3temparray[j]) > 0) {
+                            temp = Q3temparray[i];
+                            Q3temparray[i] = Q3temparray[j];
+                            Q3temparray[j] = temp;
+                        }
+                    }
+                }
+                System.out.println("After sorted cashier 3  :");
+                for (String name : Q3temparray) {
+                    System.out.println(name);
+                }
+            }else{
+                System.out.println("Invalid Input");
             }
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
+    public static void storeData(){
+        try{
+            if (logFile.createNewFile()){
+                System.out.println("Log file created");
+                writeToFile(cusNameArray1,cusNameArray2,cusNameArray3);
+            }else {
+                System.out.println("File already exists.");
+                Scanner sc = new Scanner(System.in);
 
+                while (true){
+                    System.out.println("Do you want to overwrite?(Y/N)");
+                    String overwriteChoice = sc.nextLine();
+                    if (overwriteChoice.equalsIgnoreCase("y")){
+                        writeToFile(cusNameArray1,cusNameArray2,cusNameArray3);
+                        System.out.println("Data stored successfully!!");
+                        break;
+                    } else if (overwriteChoice.equalsIgnoreCase("n")) {
+                        break;
+                    }else {
+                        System.out.println("Invalid input.");
+                    }
+                }
+            }
+
+        }catch (IOException e){
+            System.out.println("Error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeToFile(String[] cusNameArray1, String[] cusNameArray2, String[] cusNameArray3) {
+        try {
+            FileWriter logWrite = new FileWriter("cashier-data.txt");
+            logWrite.write(String.join(",",cusNameArray1)+'\n');
+            logWrite.write(String.join(",",cusNameArray2)+'\n');
+            logWrite.write(String.join(",",cusNameArray3)+'\n');
+            logWrite.write(String.valueOf(burgerAmount));
+            logWrite.close();
+        }catch (IOException e) {
+            System.out.println("Error occurred.");
+        }
+    }
+
+    public static void loadDataFromFile(){
+        try {
+            if (logFile.exists()) {
+                System.out.println("This action cannot be undone!!!");
+                Scanner sc  = new Scanner(System.in);
+                while (true) {
+                    System.out.println("Do you want to overwrite?(Y/N)");
+                    String overwriteChoice = sc.nextLine();
+                    if (overwriteChoice.equalsIgnoreCase("y")) {
+                        Path file = Path.of("cashier-data.txt");
+                        String[] cashier1Loaded = Files.readAllLines(file).get(0).split(",");
+                        String[] cashier2Loaded = Files.readAllLines(file).get(1).split(",");
+                        String[] cashier3Loaded = Files.readAllLines(file).get(2).split(",");
+                        burgerAmount = Integer.parseInt(Files.readAllLines(file).get(3));
+                        System.arraycopy(cashier1Loaded, 0, cusNameArray1, 0, cusNameArray1.length);
+                        System.arraycopy(cashier2Loaded, 0, cusNameArray2, 0, cusNameArray2.length);
+                        System.arraycopy(cashier3Loaded, 0, cusNameArray3, 0, cashier3Loaded.length);
+                        System.out.println("Data successfully loaded.");
+                        break;
+                    } else if (overwriteChoice.equalsIgnoreCase("n")) {
+                        break;
+                    }else {
+                        System.out.println("Invalid Input.");
+                    }
+                }
+
+            } else {
+                System.out.println("No log file to retrieve data from.");
+            }
+        }catch (IOException e){
+            System.out.println("Error occurred.");
+        }
+
+    }
+    
 }
