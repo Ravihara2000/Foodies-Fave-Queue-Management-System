@@ -3,7 +3,7 @@ package task2;
 import java.io.File;
 import java.util.Scanner;
 
-public class Main {
+public class main {
     static Scanner scn = new Scanner(System.in);
 
     static String[] array1 = {"X", "X","X"};
@@ -118,6 +118,7 @@ public class Main {
 
             System.out.println();
         }
+        queueDetails();
 
 
     }
@@ -141,6 +142,20 @@ public class Main {
         } else {
             System.out.println("Cashier 3 is busy");
         }
+    }
+
+    private static void queueDetails(){
+        for (int i=0;i<3;i++){
+            System.out.println("---------------------------- Cashier "+(i+1)+" -----------------------------");
+            System.out.printf("%15s | %15s | %15s\n", "First Name", "Second Name", "No Of Burgers");
+            System.out.println("-----------------------------------------------------------------");
+
+
+        }
+    }
+
+    private static void addCustomers(){
+        
     }
 
 
