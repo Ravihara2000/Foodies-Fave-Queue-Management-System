@@ -157,6 +157,17 @@ public class main {
     private static void addCustomers(){
         
     }
+    public static void viewRemainingBurgers(){
+        System.out.printf("You have remaining %d burgers",burgerAmount);
+    }
+
+    public static void addBurgersStock(){
+        System.out.println("How many burgers you want to add to the stock  :");
+        int amnt = scn.nextInt();
+
+        burgerAmount= burgerAmount+amnt;
+        System.out.println("Burger stocks updated");
+    }
 
 
 
