@@ -14,6 +14,15 @@ public class main {
     static String[] cusNameArray3=new String[5];
     static File logFile = new File("cashier-data.txt");
     static int burgerAmount=50;
+    // Queue capacities
+    static int queue1Capacity = 2;
+    static int queue2Capacity = 3;
+    static int queue3Capacity = 5;
+
+    // Queue lengths
+    static int queue1Length = 2;
+    static int queue2Length = 3;
+    static int queue3Length = 5;
 
     public static void main(String[] args) {
         int x = 0;
@@ -37,7 +46,7 @@ public class main {
                     break;
                 case "102":
                 case "ACQ":
-                    //addCustomers();
+                    addCustomers();
                     break;
                 case "103":
                 case "RCQ":
@@ -155,7 +164,41 @@ public class main {
     }
 
     private static void addCustomers(){
-        
+
+        // Find the queue with the minimum number of customers
+        int minCustomers = Math.min(Math.min(queue1Length, queue2Length), queue3Length);
+
+        // Determine the queue number with the minimum number of customers
+        int queueNumber;
+        if (minCustomers == queue1Length) {
+            queueNumber = 1;
+        } else if (minCustomers == queue2Length) {
+            queueNumber = 2;
+        } else {
+            queueNumber = 3;
+        }
+
+        // Check if the selected queue is at its maximum capacity
+        if ((queueNumber == 1 && queue1Length == queue1Capacity)
+                || (queueNumber == 2 && queue2Length == queue2Capacity)
+                || (queueNumber == 3 && queue3Length == queue3Capacity)) {
+            System.out.println("Selected queue is already at maximum capacity and cannot accept more customers.");
+        } else {
+            // Add the customer to the queue with the minimum number of customers
+            if (queueNumber == 1) {
+                queue1Length++;
+            } else if (queueNumber == 2) {
+                queue2Length++;
+            } else {
+                queue3Length++;
+            }
+
+            // Print the selected queue number and updated queue lengths
+            System.out.println("Customer added to Queue " + queueNumber);
+            System.out.println("Updated Queue 1 length: " + queue1Length);
+            System.out.println("Updated Queue 2 length: " + queue2Length);
+            System.out.println("Updated Queue 3 length: " + queue3Length);
+        }
     }
     public static void viewRemainingBurgers(){
         System.out.printf("You have remaining %d burgers",burgerAmount);
