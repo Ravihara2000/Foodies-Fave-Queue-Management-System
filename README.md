@@ -16,3 +16,9 @@
 ### 109 or AFS: Add burgers to Stock.
 ### 999 or EXT: Exit the Program
 
+## Technology
+
+#### Java 16 or higher
+## IDE
+#### IntelliJ IDEA
+
