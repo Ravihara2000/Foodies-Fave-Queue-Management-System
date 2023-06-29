@@ -94,7 +94,7 @@ public class Main {
         System.out.println("-------------------------------------");
     }
 
-    public static void viewAllQueues() {
+    public static void viewAllQueues() {//display all 3 queues
         System.out.println("*****************");
         System.out.println("*\tCashiers\t*");
         System.out.println("*****************");
@@ -123,7 +123,7 @@ public class Main {
 
     }
 
-    public static void viewEmptyQueues() {
+    public static void viewEmptyQueues() {//display only the empty queues
 
         if (array1[0] == "O") {
             System.out.println("Cashier 1 is empty");
@@ -146,20 +146,20 @@ public class Main {
 
     public static void addCustomers() {
         try {
-            for (int v = 1; v > -1; v++) {
+            for (int v = 1; v > -1; v++) {//take the queue number from user
                 System.out.println("Enter Queue number you wish to add customer(1-3) or Press 0 to come back to menu  :");
                 int qNum = scn.nextInt();
 
 
 
                 if (qNum == 1) {
-                    if (array1[1] == "O") {
+                    if (array1[1] == "O") {//check whether the last slot is empty in queue (index 1)
                         for (int i = 0; i < 2; i++) {
-                            if (array1[i] == "O") {
+                            if (array1[i] == "O") {//get customer name if the slot is empty
                                 System.out.println("Enter Customer name  :");
                                 String cName = scn.next();
                                 array1[i] = "X";
-                                cusNameArray1[i] = cName;
+                                cusNameArray1[i] = cName;//insert customer name ito array
                                 System.out.println(cusNameArray1[i] + " added to the queue 1");
                                 break;
                             }
