@@ -168,7 +168,7 @@ public class main {
         // Find the queue with the minimum number of customers
         int minCustomers = Math.min(Math.min(queue1Length, queue2Length), queue3Length);
 
-        // Determine the queue number with the minimum number of customers
+// Determine the queue number with the minimum number of customers
         int queueNumber;
         if (minCustomers == queue1Length) {
             queueNumber = 1;
@@ -178,27 +178,62 @@ public class main {
             queueNumber = 3;
         }
 
-        // Check if the selected queue is at its maximum capacity
-        if ((queueNumber == 1 && queue1Length == queue1Capacity)
-                || (queueNumber == 2 && queue2Length == queue2Capacity)
-                || (queueNumber == 3 && queue3Length == queue3Capacity)) {
-            System.out.println("Selected queue is already at maximum capacity and cannot accept more customers.");
-        } else {
-            // Add the customer to the queue with the minimum number of customers
-            if (queueNumber == 1) {
-                queue1Length++;
-            } else if (queueNumber == 2) {
-                queue2Length++;
-            } else {
-                queue3Length++;
+// Check if the selected queue is at its maximum capacity
+        if (queueNumber == 1 && queue1Length == queue1Capacity){
+            // Check if queue 2 has available capacity
+            if (queue2Length < queue2Capacity) {
+                queueNumber = 2;
             }
-
-            // Print the selected queue number and updated queue lengths
-            System.out.println("Customer added to Queue " + queueNumber);
-            System.out.println("Updated Queue 1 length: " + queue1Length);
-            System.out.println("Updated Queue 2 length: " + queue2Length);
-            System.out.println("Updated Queue 3 length: " + queue3Length);
+            // Check if queue 3 has available capacity
+            else if (queue3Length < queue3Capacity) {
+                queueNumber = 3;
+            } else {
+                System.out.println("All queues are already at maximum capacity and cannot accept more customers.");
+                return;
+            }
         }
+        else if(queueNumber == 2 && queue2Length == queue2Capacity){
+            // Check if queue 1 has available capacity
+            if (queue1Length < queue1Capacity) {
+                queueNumber = 1;
+            }
+            // Check if queue 3 has available capacity
+            else if (queue3Length < queue3Capacity) {
+                queueNumber = 3;
+            } else {
+                System.out.println("All queues are already at maximum capacity and cannot accept more customers.");
+                return;
+            }
+        }
+        else if(queueNumber == 3 && queue3Length == queue3Capacity) {
+            // Check if queue 1 has available capacity
+            if (queue1Length < queue1Capacity) {
+                queueNumber = 1;
+            }
+            // Check if queue 2 has available capacity
+            else if (queue2Length < queue2Capacity) {
+                queueNumber = 2;
+            } else {
+                System.out.println("All queues are already at maximum capacity and cannot accept more customers.");
+                return;
+            }
+        }
+
+// Add the customer to the queue with the minimum number of customers
+        if (queueNumber == 1) {
+            queue1Length++;
+        } else if (queueNumber == 2) {
+            queue2Length++;
+        } else {
+            queue3Length++;
+        }
+
+// Print the selected queue number and updated queue lengths
+        System.out.println("Customer added to Queue " + queueNumber);
+        System.out.println("Updated Queue 1 length: " + queue1Length);
+        System.out.println("Updated Queue 2 length: " + queue2Length);
+        System.out.println("Updated Queue 3 length: " + queue3Length);
+
     }
     public static void viewRemainingBurgers(){
         System.out.printf("You have remaining %d burgers",burgerAmount);
