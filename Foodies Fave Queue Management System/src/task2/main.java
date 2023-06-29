@@ -20,9 +20,9 @@ public class main {
     static int queue3Capacity = 5;
 
     // Queue lengths
-    static int queue1Length = 2;
-    static int queue2Length = 3;
-    static int queue3Length = 5;
+    static int queue1Length = 0;
+    static int queue2Length = 0;
+    static int queue3Length = 0;
 
     public static void main(String[] args) {
         int x = 0;
