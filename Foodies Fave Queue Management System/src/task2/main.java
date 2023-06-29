@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class main {
+    static int c1=0;
     static Scanner scn = new Scanner(System.in);
 
     static String[] array1 = {"X", "X","X"};
@@ -221,10 +222,14 @@ public class main {
 
 // Add the customer to the queue with the minimum number of customers
         if (queueNumber == 1) {
+            array1[queue1Length] = "O";
             queue1Length++;
+
         } else if (queueNumber == 2) {
+            array2[queue2Length] = "O";
             queue2Length++;
         } else {
+            array3[queue3Length] = "O";
             queue3Length++;
         }
 
