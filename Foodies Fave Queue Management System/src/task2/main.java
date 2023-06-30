@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class main {
     static int c1=0;
     static Scanner scn = new Scanner(System.in);
+    //    Object list for store all pump objects
+    static FoodQueue[] foodArray = new FoodQueue[10];
 
     static String[] array1 = {"X", "X","X"};
     static String[] array2 = {"X", "X", "X","X"};
@@ -243,7 +245,7 @@ public class main {
     public static void getCustomerDetail(){
         String firstName;
         String secondName;
-        int reqBurger;
+        int reqBurger=0;
 
         while (true) {
             System.out.print("Enter customer first name : ");
@@ -275,6 +277,12 @@ public class main {
             } catch (Exception e) {
                 System.out.println("WARNING!! No. of burgers must be integer");
                 scn.nextLine();
+            }
+            if (burgerAmount-reqBurger<0){
+                System.out.println("Not enough burgers to serve entered customer. Restock and try again.");
+            }else {
+                burgerAmount-=reqBurger;
+                foodArray.addCustomerObj(firstName,secondName,reqBurger);
             }
         }
     }
