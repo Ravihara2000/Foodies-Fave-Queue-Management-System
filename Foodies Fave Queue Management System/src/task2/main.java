@@ -71,11 +71,11 @@ public class main {
                     break;
                 case "108":
                 case "STK":
-                    //viewRemainingBurgers();
+                    viewRemainingBurgers();
                     break;
                 case "109":
                 case "AFS":
-                    //addBurgersStock();
+                    addBurgersStock();
                     break;
                 case "999":
                 case "EXT":
@@ -250,6 +250,112 @@ public class main {
 
         burgerAmount= burgerAmount+amnt;
         System.out.println("Burger stocks updated");
+    }
+
+    public static void removeCustomer(){
+        int x=0;
+        try {
+            while(x<1) {
+                System.out.println("Enter Cashier Number :");
+                int cashNum = scn.nextInt();
+
+                System.out.println("Enter the position of the Queue  :");
+                int position = scn.nextInt();
+
+                if (cashNum == 1) {
+                    if (position - 1 < 2) {
+                        if (array1[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array1[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 2) {
+                    if (position - 1 < 3) {
+                        if (array2[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array2[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 3) {
+                    if (position - 1 < 5) {
+                        if (array3[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else if (array3[position - 1] == "X") {
+                            array3[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }int x=0;
+        try {
+            while(x<1) {
+                System.out.println("Enter Cashier Number :");
+                int cashNum = scn.nextInt();
+
+                System.out.println("Enter the position of the Queue  :");
+                int position = scn.nextInt();
+
+                if (cashNum == 1) {
+                    if (position - 1 < 2) {
+                        if (array1[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array1[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 2) {
+                    if (position - 1 < 3) {
+                        if (array2[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else {
+                            array2[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+                if (cashNum == 3) {
+                    if (position - 1 < 5) {
+                        if (array3[position - 1] == "O") {
+                            System.out.println("There is no customer in this position");
+                        } else if (array3[position - 1] == "X") {
+                            array3[position - 1] = "O";
+                            System.out.println("Removed customer from queue 1");
+                        }
+                        break;
+                    } else {
+                        System.out.println("Invalid Input");
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
 
