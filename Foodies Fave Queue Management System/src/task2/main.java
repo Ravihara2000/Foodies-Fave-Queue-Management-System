@@ -352,6 +352,55 @@ public class main {
             System.out.println(e);
         }
     }
+    public static void removeServedCustomer(){
+        try{
+            System.out.println("Enter Cashier Number :");
+            int cashNum = scn.nextInt();
+
+            if(cashNum==1){
+                if(array1[0]=="O"){
+                    System.out.println("There is no customer in the queue 1");
+                }else{
+                    for(int i=0;i<2;i++){
+                        array1[i]=array1[i+1];
+                    }
+                    burgerAmount-=5;
+                    System.out.println("Removed the served customer");
+                }
+            }
+            else if(cashNum==2){
+                if(array2[0]=="O"){
+                    System.out.println("There is no customer in the queue 2");
+                }else{
+                    for(int i=0;i<3;i++){
+                        array3[i]=array3[i+1];
+                    }
+                    burgerAmount-=5;
+                    System.out.println("Removed the served customer");
+                }
+            }
+            else if(cashNum==3){
+                if(array3[0]=="O"){
+                    System.out.println("There is no customer in the queue 3");
+                }else{
+                    for(int i=0;i<5;i++){
+                        array3[i]=array3[i+1];
+                    }
+                    burgerAmount-=5;
+                    System.out.println("Removed the served customer");
+                }
+            }
+            else{
+                System.out.println("Invalid Input");
+            }
+            if (burgerAmount<=10){
+                System.out.println("****The stock of burgers is running low. Please replenish the stock.****");
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
 
 }
