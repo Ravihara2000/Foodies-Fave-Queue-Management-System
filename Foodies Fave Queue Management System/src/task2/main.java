@@ -397,9 +397,6 @@ public class main {
                 System.out.println("****The stock of burgers is running low. Please replenish the stock.****");
             }
 
-        }catch (Exception e){
-            System.out.println(e);
-        }
     }
 
 
