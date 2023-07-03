@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 public class main {
     static int c1=0;
+    static int queueLength = 10;
     static Scanner scn = new Scanner(System.in);
     //    Object list for store all pump objects
-    static FoodQueue[] foodArray = new FoodQueue[10];
+    static FoodQueue[] foodQueues = new FoodQueue[10];
 
     static String[] array1 = {"X", "X","X"};
     static String[] array2 = {"X", "X", "X","X"};
@@ -106,12 +107,15 @@ public class main {
         System.out.println("-------------------------------------");
     }
     public static void viewAllQueues() {
+        sample();
+        int i = 0;
+        //queueDetails(i);
         System.out.println("*****************");
         System.out.println("*\tCashiers\t*");
         System.out.println("*****************");
 
 
-        for (int i = 0; i < 10; i++) {
+        for (i = 0; i < 10; i++) {
             if (i < 2) {
                 System.out.print(array1[i] + "\t");
             } else {
@@ -129,10 +133,16 @@ public class main {
             }
 
             System.out.println();
+
         }
-        queueDetails();
 
 
+    }
+
+    public static void sample(){
+        for(int i = 0; i < 10; i++){
+            queueDetails(i);
+        }
     }
 
     public static void viewEmptyQueues() {
@@ -156,13 +166,26 @@ public class main {
         }
     }
 
-    private static void queueDetails(){
+    private static void queueDetails(int queueNum){
+        try{
         for (int i=0;i<3;i++){
             System.out.println("---------------------------- Cashier "+(i+1)+" -----------------------------");
             System.out.printf("%15s | %15s | %15s\n", "First Name", "Second Name", "No Of Burgers");
             System.out.println("-----------------------------------------------------------------");
+            for (int j = 0; j <foodQueues[queueNum].size(); j++) {
+                System.out.printf("%15s | %15s | %15s | %10s\n", foodQueues[queueNum].getCustomer(j).getFirstName(),foodQueues[queueNum].getCustomer(j).getSecondName(),foodQueues[queueNum].getCustomer(j).getNoOfBurger());
+            }
+            if (foodQueues[queueNum].size()<queueLength){
+                int emptyLength = queueLength - foodQueues[queueNum].size();
+                for (int k = 0; k < emptyLength; k++) {
+                    System.out.printf("%15s | %15s | %15s | %10s\n", "empty","empty","-","-");
+                }
+            }
 
 
+        }
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 
@@ -242,7 +265,7 @@ public class main {
         System.out.println("Updated Queue 3 length: " + queue3Length);
 
     }
-    public static void getCustomerDetail(){
+    public static void getCustomerDetail(FoodQueue foodQueue){
         String firstName;
         String secondName;
         int reqBurger=0;
@@ -282,7 +305,7 @@ public class main {
                 System.out.println("Not enough burgers to serve entered customer. Restock and try again.");
             }else {
                 burgerAmount-=reqBurger;
-                foodArray.addCustomerObj(firstName,secondName,reqBurger);
+                foodQueue.addCustomerObj(firstName,secondName,reqBurger);
             }
         }
     }
@@ -352,52 +375,51 @@ public class main {
             System.out.println(e);
         }
     }
-    public static void removeServedCustomer(){
-        try{
+    public static void removeServedCustomer() {
+        try {
             System.out.println("Enter Cashier Number :");
             int cashNum = scn.nextInt();
 
-            if(cashNum==1){
-                if(array1[0]=="O"){
+            if (cashNum == 1) {
+                if (array1[0] == "O") {
                     System.out.println("There is no customer in the queue 1");
-                }else{
-                    for(int i=0;i<2;i++){
-                        array1[i]=array1[i+1];
+                } else {
+                    for (int i = 0; i < 2; i++) {
+                        array1[i] = array1[i + 1];
                     }
-                    burgerAmount-=5;
+                    burgerAmount -= 5;
                     System.out.println("Removed the served customer");
                 }
-            }
-            else if(cashNum==2){
-                if(array2[0]=="O"){
+            } else if (cashNum == 2) {
+                if (array2[0] == "O") {
                     System.out.println("There is no customer in the queue 2");
-                }else{
-                    for(int i=0;i<3;i++){
-                        array3[i]=array3[i+1];
+                } else {
+                    for (int i = 0; i < 3; i++) {
+                        array3[i] = array3[i + 1];
                     }
-                    burgerAmount-=5;
+                    burgerAmount -= 5;
                     System.out.println("Removed the served customer");
                 }
-            }
-            else if(cashNum==3){
-                if(array3[0]=="O"){
+            } else if (cashNum == 3) {
+                if (array3[0] == "O") {
                     System.out.println("There is no customer in the queue 3");
-                }else{
-                    for(int i=0;i<5;i++){
-                        array3[i]=array3[i+1];
+                } else {
+                    for (int i = 0; i < 5; i++) {
+                        array3[i] = array3[i + 1];
                     }
-                    burgerAmount-=5;
+                    burgerAmount -= 5;
                     System.out.println("Removed the served customer");
                 }
-            }
-            else{
+            } else {
                 System.out.println("Invalid Input");
             }
-            if (burgerAmount<=10){
+            if (burgerAmount <= 10) {
                 System.out.println("****The stock of burgers is running low. Please replenish the stock.****");
             }
 
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
-
-
 }
