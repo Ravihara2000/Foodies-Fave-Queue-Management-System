@@ -139,11 +139,11 @@ public class main {
 
     }
 
-    public static void sample(){
+/*    public static void sample(){
         for(int i = 0; i < 10; i++){
             queueDetails(i);
         }
-    }
+    }*/
 
     public static void viewEmptyQueues() {
 
