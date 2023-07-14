@@ -116,6 +116,7 @@ public class main {
 
 
         for (i = 0; i < 10; i++) {
+            //queueDetails();
             if (i < 2) {
                 System.out.print(array1[i] + "\t");
             } else {
@@ -260,6 +261,7 @@ public class main {
 
 // Print the selected queue number and updated queue lengths
         System.out.println("Customer added to Queue " + queueNumber);
+        getCustomerDetail(foodQueues[queueNumber]);
         System.out.println("Updated Queue 1 length: " + queue1Length);
         System.out.println("Updated Queue 2 length: " + queue2Length);
         System.out.println("Updated Queue 3 length: " + queue3Length);
