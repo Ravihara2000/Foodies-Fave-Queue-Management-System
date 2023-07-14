@@ -107,7 +107,7 @@ public class main {
         System.out.println("-------------------------------------");
     }
     public static void viewAllQueues() {
-        sample();
+        //sample();
         int i = 0;
         //queueDetails(i);
         System.out.println("*****************");

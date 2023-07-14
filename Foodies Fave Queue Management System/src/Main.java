@@ -18,10 +18,10 @@ public class Main {
     static int burgerAmount=50;
 
     public static void main(String[] args) {
-        int x = 0;
+        //int x = 0;
 
 
-        while (x < 1) {
+        for (;;) {
             displayMenu();
 
             System.out.println("Enter Your Option  :");
