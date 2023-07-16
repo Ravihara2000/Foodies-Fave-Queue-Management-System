@@ -24,7 +24,6 @@ public class main {
     static int queue2Capacity = 3;
     static int queue3Capacity = 5;
 
-    private static ArrayList<Customer>[] foodQueues1; // Assuming this is the declaration of your ArrayList
 
     // Queue lengths
     static int queue1Length = 0;
@@ -145,7 +144,7 @@ public class main {
         int minCustomers = Math.min(Math.min(queue1Length, queue2Length), queue3Length);
 
         // Determine the queue number with the minimum number of customers
-        int queueNumber=0;
+        int queueNumber;
         if (minCustomers == queue1Length) {
             queueNumber = 1;
         } else if (minCustomers == queue2Length) {
@@ -251,7 +250,7 @@ public class main {
             }
         }
         if (burgerAmount-reqBurger<0){
-            System.out.println("Not enough fuel to serve entered customer. Restock and try again.");
+            System.out.println("Not enough burgers to serve entered customer. Restock and try again.");
         }else {
             burgerAmount-=reqBurger;
             foodQueue.addCustomerObj(firstName,secondName,reqBurger);

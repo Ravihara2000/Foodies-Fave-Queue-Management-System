@@ -1,6 +1,5 @@
 package task2;
 
-import task4.Passenger;
 
 import java.util.ArrayList;
 
