@@ -1,7 +1,5 @@
 package task2;
 
-import task4.Pump;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +8,7 @@ public class main {
     static int c1=0;
     static int queueLength = 5;
     static Scanner scn = new Scanner(System.in);
-    //    Object list for store all pump objects
+    //    Object list for store all cashier objects
     static FoodQueue[] foodArray = new FoodQueue[3];
 
     static String[] array1 = {"X", "X","X"};
@@ -127,7 +125,7 @@ public class main {
     }
 
     private static void queueDetails(int queueNum) {
-        System.out.println("---------------------------- PUMP "+(queueNum+1)+" -----------------------------");
+        System.out.println("---------------------------- Cashier "+(queueNum+1)+" -----------------------------");
         System.out.printf("%15s | %15s | %15s|\n", "First Name", "Last Name", "Required Burgers");
         System.out.println("-----------------------------------------------------------------");
         for (int j = 0; j < foodArray[queueNum].size(); j++) {
