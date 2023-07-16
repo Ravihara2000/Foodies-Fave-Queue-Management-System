@@ -1,6 +1,8 @@
 package task2;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class main {
@@ -113,7 +115,56 @@ public class main {
     }
 
     private static void storeData() {
-        
+        try{
+            if (logFile.createNewFile()){
+                System.out.println("Log file created");
+                writeToFile();
+            }else {
+                System.out.println("File already exists.");
+                Scanner sc = new Scanner(System.in);
+
+                while (true){
+                    System.out.println("Do you want to overwrite?(Y/N)");
+                    String overwriteChoice = sc.nextLine();
+                    if (overwriteChoice.equalsIgnoreCase("y")){
+                        writeToFile();
+                        System.out.println("Data stored successfully!!");
+                        break;
+                    } else if (overwriteChoice.equalsIgnoreCase("n")) {
+                        break;
+                    }else {
+                        System.out.println("Invalid input.");
+                    }
+                }
+            }
+
+        }catch (IOException e){
+            System.out.println("Error occurred.");
+            e.printStackTrace();
+        }
+    }
+    //    Write necessary data to cashier-data.txt
+    private static void writeToFile(){
+        try {
+            FileWriter logWrite = new FileWriter("cashier-data.txt");
+            for (int i = 0; i < foodArray.length; i++) {
+                for (int j = 0; j < foodArray[i].size(); j++) {
+                    logWrite.write(foodArray[i].getCustomer(j).toString());
+                }
+                if (foodArray[i].size() < queueLength) {
+                    int emptyLength = queueLength - foodArray[i].size();
+                    for (int k = 0; k < emptyLength; k++) {
+                        logWrite.write("\n");
+                    }
+                }
+            }
+            logWrite.write(String.valueOf(burgerAmount)+"\n");
+            logWrite.write(Arrays.toString(cashierIncome).replaceAll("\\[", "").replaceAll("\\]","").replaceAll(" ",""));
+            logWrite.close();
+        }catch (IOException e) {
+            System.out.println("Error occurred.");
+        }
+
     }
 
     private static void sortedCustomer() {
