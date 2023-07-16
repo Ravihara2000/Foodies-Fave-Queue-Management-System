@@ -1,27 +1,34 @@
 package task2;
 
+import task4.Passenger;
+
 import java.util.ArrayList;
 
 public class FoodQueue {
     //    ArrayList to store passenger object relevant to the queue
-    private ArrayList<Customer> CusQueue =new ArrayList<Customer>();
+    private ArrayList<Customer> foodQueue =new ArrayList<Customer>();
     private int queueLength;
+
+    public FoodQueue(int foodQueueLength){
+        this.queueLength = foodQueueLength;
+    }
+
+
+
     //    Creating Passenger objects and add it to ArrayList
     public void addCustomerObj(String cusFirstName, String cusLastName, int reqBurgers) {
-        if (CusQueue.size()<queueLength){
-            CusQueue.add(new Customer(cusFirstName,cusLastName,reqBurgers));
+        if (foodQueue.size()<queueLength){
+            foodQueue.add(new Customer(cusFirstName,cusLastName,reqBurgers));
         }else {
             System.out.println("Array is full");
         }
 
     }
     public int size(){
-        return CusQueue.size();
+        return foodQueue.size();
     }
     public Customer getCustomer(int customerIndex){
-        return CusQueue.get(customerIndex);
+        return foodQueue.get(customerIndex);
     }
-
-
 
 }

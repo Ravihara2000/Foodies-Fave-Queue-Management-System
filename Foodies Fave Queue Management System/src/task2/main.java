@@ -1,5 +1,7 @@
 package task2;
 
+import task4.Pump;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +11,7 @@ public class main {
     static int queueLength = 5;
     static Scanner scn = new Scanner(System.in);
     //    Object list for store all pump objects
-    static FoodQueue[] foodQueues = new FoodQueue[3];
+    static FoodQueue[] foodArray = new FoodQueue[3];
 
     static String[] array1 = {"X", "X","X"};
     static String[] array2 = {"X", "X", "X","X"};
@@ -33,11 +35,9 @@ public class main {
     //static CustomerQueue[] foodQueues = new CustomerQueue[10]; // assuming CustomerQueue is a class to hold customer details
 
     public static void main(String[] args) {
-        // Initialize the foodQueues array
-        int numQueues = 3; // Adjust the number of queues as needed
-        foodQueues1 = new ArrayList[numQueues];
-        for (int i = 0; i < numQueues; i++) {
-            foodQueues1[i] = new ArrayList<Customer>();
+//create foodqueue objects into foodArray
+        for (int i = 0; i < foodArray.length; i++) {
+            foodArray[i]=new FoodQueue(queueLength);
         }
         int x = 0;
 
@@ -119,7 +119,7 @@ public class main {
     public static void viewAllQueues() {
         //sample();
         //
-        for (int i = 0; i < foodQueues1.length; i++) {
+        for (int i = 0; i < foodArray.length; i++) {
             queueDetails(i);
             System.out.println();
 
@@ -127,25 +127,17 @@ public class main {
     }
 
     private static void queueDetails(int queueNum) {
-        try {
-            System.out.println("---------------------------- Cashier " + (queueNum + 1) + " -----------------------------");
-            System.out.printf("%15s | %15s | %15s\n", "First Name", "Second Name", "No Of Burgers");
-            System.out.println("-----------------------------------------------------------------");
-
-            ArrayList<Customer> currentQueue = foodQueues1[queueNum]; // Retrieve the ArrayList for the current queue
-
-            for (Customer customer : currentQueue) {
-                System.out.printf("%15s | %15s | %15s\n", customer.getFirstName(), customer.getSecondName(), customer.getNoOfBurger());
+        System.out.println("---------------------------- PUMP "+(queueNum+1)+" -----------------------------");
+        System.out.printf("%15s | %15s | %15s|\n", "First Name", "Last Name", "Required Burgers");
+        System.out.println("-----------------------------------------------------------------");
+        for (int j = 0; j < foodArray[queueNum].size(); j++) {
+            System.out.printf("%15s | %15s | %15s \n", foodArray[queueNum].getCustomer(j).getFirstName(), foodArray[queueNum].getCustomer(j).getSecondName(), foodArray[queueNum].getCustomer(j).getNoOfBurger());
+        }
+        if (foodArray[queueNum].size()<queueLength){
+            int emptyLength = queueLength - foodArray[queueNum].size();
+            for (int k = 0; k < emptyLength; k++) {
+                System.out.printf("%15s | %15s | %15s \n", "empty","empty","-");
             }
-
-            if (currentQueue.size() < queueLength) {
-                int emptyLength = queueLength - currentQueue.size();
-                for (int k = 0; k < emptyLength; k++) {
-                    System.out.printf("%15s | %15s | %15s\n", "empty", "empty", "-");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("errors");
         }
     }
 
@@ -155,7 +147,7 @@ public class main {
         int minCustomers = Math.min(Math.min(queue1Length, queue2Length), queue3Length);
 
         // Determine the queue number with the minimum number of customers
-        int queueNumber;
+        int queueNumber=0;
         if (minCustomers == queue1Length) {
             queueNumber = 1;
         } else if (minCustomers == queue2Length) {
@@ -216,8 +208,8 @@ public class main {
         }
 
         // Print the selected queue number and updated queue lengths
-        System.out.println("Customer added to Queue " + queueNumber);
-        getCustomerDetail(foodQueues[queueNumber - 1]);
+        System.out.println("Customer added to Queue " + (queueNumber));
+        getCustomerDetail(foodArray[queueNumber-1]);
         System.out.println("Updated Queue 1 length: " + queue1Length);
         System.out.println("Updated Queue 2 length: " + queue2Length);
         System.out.println("Updated Queue 3 length: " + queue3Length);
@@ -260,10 +252,13 @@ public class main {
                 scn.nextLine();
             }
         }
+        if (burgerAmount-reqBurger<0){
+            System.out.println("Not enough fuel to serve entered customer. Restock and try again.");
+        }else {
+            burgerAmount-=reqBurger;
+            foodQueue.addCustomerObj(firstName,secondName,reqBurger);
+        }
 
-        Customer customer = new Customer(firstName, secondName, reqBurger);
-        foodQueue.addCustomerObj(firstName,secondName,reqBurger);
-        burgerAmount -= reqBurger;
     }
     public static void viewRemainingBurgers(){
         System.out.printf("You have remaining %d burgers",burgerAmount);
