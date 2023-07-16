@@ -43,7 +43,7 @@ public class main {
     //static CustomerQueue[] foodQueues = new CustomerQueue[10]; // assuming CustomerQueue is a class to hold customer details
 
     public static void main(String[] args) {
-/*        //        Set starting value of every pump income to zero
+/*        //        Set starting value of every cashier income to zero
         Arrays.fill(cashierIncome, 0);*/
 //create foodqueue objects into foodArray
         for (int i = 0; i < foodArray.length; i++) {
@@ -140,9 +140,9 @@ public class main {
 
                         }
                         burgerAmount = Integer.parseInt(Files.readAllLines(file).get(foodArray.length*queueLength));
-                        String[] pumpIncomeLoaded = Files.readAllLines(file).get(foodArray.length*queueLength+1).split(",");
+                        String[] cashierIncomeLoaded = Files.readAllLines(file).get(foodArray.length*queueLength+1).split(",");
                         for (int i = 0; i < cashierIncome.length; i++) {
-                            cashierIncome[i]=Integer.parseInt(pumpIncomeLoaded[i]);
+                            cashierIncome[i]=Integer.parseInt(cashierIncomeLoaded[i]);
                         }
                         System.out.println("Data loaded successfully.");
                         break;
