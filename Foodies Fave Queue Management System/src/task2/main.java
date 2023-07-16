@@ -3,6 +3,8 @@ package task2;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class main {
@@ -88,7 +90,7 @@ public class main {
                     break;
                 case "107":
                 case "LPD":
-                    //loadDataFromFile();
+                    loadDataFromFile();
                     break;
                 case "108":
                 case "STK":
@@ -110,6 +112,52 @@ public class main {
 
             }
 
+        }
+
+    }
+
+    private static void loadDataFromFile() {
+        try {
+            if (logFile.exists()) {
+                System.out.println("This action cannot be undone!!!");
+                Scanner sc  = new Scanner(System.in);
+                while (true) {
+                    System.out.println("Do you want to overwrite?(Y/N)");
+                    String overwriteChoice = sc.nextLine();
+                    if (overwriteChoice.equalsIgnoreCase("y")) {
+                        Path file = Path.of("cashier-data.txt");
+                        int lineNumber = 0;
+                        for (int i = 0; i < foodArray.length; i++) {
+                            foodArray[i].reset();
+                            for (int j = lineNumber; j < queueLength+lineNumber; j++) {
+                                String[] lineData = Files.readAllLines(file).get(j).split(",");
+                                if (lineData.length>1) {
+
+                                    foodArray[i].addCustomerObj(lineData[0], lineData[1], Integer.parseInt(lineData[3]));
+                                }
+                            }
+                            lineNumber+=queueLength;
+
+                        }
+                        burgerAmount = Integer.parseInt(Files.readAllLines(file).get(foodArray.length*queueLength));
+                        String[] pumpIncomeLoaded = Files.readAllLines(file).get(foodArray.length*queueLength+1).split(",");
+                        for (int i = 0; i < cashierIncome.length; i++) {
+                            cashierIncome[i]=Integer.parseInt(pumpIncomeLoaded[i]);
+                        }
+                        System.out.println("Data loaded successfully.");
+                        break;
+                    } else if (overwriteChoice.equalsIgnoreCase("n")) {
+                        break;
+                    }else {
+                        System.out.println("Invalid Input.");
+                    }
+                }
+
+            } else {
+                System.out.println("No log file to retrieve data from.");
+            }
+        }catch (IOException e){
+            System.out.println("Error occurred.");
         }
 
     }

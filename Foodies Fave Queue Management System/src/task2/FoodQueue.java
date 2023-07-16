@@ -36,5 +36,8 @@ public class FoodQueue {
     public void remove(int index){
         foodQueue.remove(index);
     }
+    public void reset(){
+        foodQueue.clear();
+    }
 
 }
