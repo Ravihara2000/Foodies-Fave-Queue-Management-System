@@ -30,4 +30,11 @@ public class FoodQueue {
         return foodQueue.get(customerIndex);
     }
 
+    public int getNoOfEmpty(){
+        return queueLength- foodQueue.size();
+    }
+    public void remove(int index){
+        foodQueue.remove(index);
+    }
+
 }

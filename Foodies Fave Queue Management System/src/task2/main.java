@@ -61,7 +61,7 @@ public class main {
                     break;
                 case "103":
                 case "RCQ":
-                    //removeCustomer();
+                    removeCustomer();
                     break;
                 case "104":
                 case "PCQ":
@@ -257,6 +257,8 @@ public class main {
         }
 
     }
+
+
     public static void viewRemainingBurgers(){
         System.out.printf("You have remaining %d burgers",burgerAmount);
     }
@@ -270,58 +272,58 @@ public class main {
     }
 
     public static void removeCustomer(){
-        int x=0;
-        try {
-            while(x<1) {
-                System.out.println("Enter Cashier Number :");
-                int cashNum = scn.nextInt();
-
-                System.out.println("Enter the position of the Queue  :");
-                int position = scn.nextInt();
-
-                if (cashNum == 1) {
-                    if (position - 1 < 2) {
-                        if (array1[position - 1] == "O") {
-                            System.out.println("There is no customer in this position");
-                        } else {
-                            array1[position - 1] = "O";
-                            System.out.println("Removed customer from queue 1");
-                        }
-                        break;
-                    } else {
-                        System.out.println("Invalid Input");
+        System.out.print("Enter \n1 - 1st Cashier\n2 - 2nd Cashier\n3 - 3rd Cashier\n");
+        try{
+            System.out.print("Which cashier customer do you want to remove : ");
+            int cashNum = scn.nextInt();
+            for (int i = 0; i < foodArray.length; i++) {
+                if (cashNum == i+1) {
+                    if (foodArray[i].getNoOfEmpty() < queueLength) {
+                        System.out.println("Cashier " + (i + 1) + " selected");
+                        showCustomerIndex(foodArray[i]);
                     }
-                }
-                if (cashNum == 2) {
-                    if (position - 1 < 3) {
-                        if (array2[position - 1] == "O") {
-                            System.out.println("There is no customer in this position");
-                        } else {
-                            array2[position - 1] = "O";
-                            System.out.println("Removed customer from queue 1");
-                        }
-                        break;
-                    } else {
-                        System.out.println("Invalid Input");
-                    }
-                }
-                if (cashNum == 3) {
-                    if (position - 1 < 5) {
-                        if (array3[position - 1] == "O") {
-                            System.out.println("There is no customer in this position");
-                        } else if (array3[position - 1] == "X") {
-                            array3[position - 1] = "O";
-                            System.out.println("Removed customer from queue 1");
-                        }
-                        break;
-                    } else {
-                        System.out.println("Invalid Input");
+                    else {
+                        System.out.println("Cashier" + (i + 1) + " is empty");
                     }
                 }
             }
+
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("Only integers are allowed");
         }
+
+    }
+    //    Show customer name and vehicle number to user with index to remove any customer within the queue
+    public static void showCustomerIndex(FoodQueue foodQueue){
+        Scanner scanner = new Scanner(System.in);
+        int index = 0;
+        System.out.printf("%2s | %15s | %15s \n","Index", "First Name", "Second Name");
+        System.out.println("-----------------------------------------------------------------");
+        for (int i = 0; i < foodQueue.size(); i++) {
+            System.out.printf("%5s | %15s | %15s \n",i+1, foodQueue.getCustomer(i).getFirstName(), foodQueue.getCustomer(i).getSecondName());
+            index++;
+        }
+        System.out.printf("\n%5s | %15s |", "999", "Exit");
+        while (true) {
+            try {
+                System.out.print("\nSelect customer by Index : ");
+                int selectedIndex = scanner.nextInt();
+
+                if (selectedIndex <= index) {
+                    burgerAmount+=foodQueue.getCustomer(selectedIndex-1).getNoOfBurger();
+                    foodQueue.remove(selectedIndex-1);
+                    break;
+                } else if (selectedIndex == 999) {
+                    break;
+                } else {
+                    System.out.println("Selected index doesn't exist");
+                }
+            } catch (Exception e) {
+                System.out.println("Only integers are allowed.");
+                scanner.nextLine();
+            }
+        }
+
     }
     public static void removeServedCustomer() {
         try {
