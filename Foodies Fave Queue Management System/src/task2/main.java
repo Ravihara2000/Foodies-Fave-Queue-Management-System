@@ -1,10 +1,16 @@
 package task2;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
+
+    //    Integer list for store income of each Cashier.
+    static Integer[] cashierIncome = new Integer[3];
+    // Initialize the cashierIncome array
+
+
     static int c1=0;
     static int queueLength = 5;
     static Scanner scn = new Scanner(System.in);
@@ -14,15 +20,17 @@ public class main {
     static String[] array1 = {"X", "X","X"};
     static String[] array2 = {"X", "X", "X","X"};
     static String[] array3 = {"X", "X", "X", "X", "X","X"};
-    static String[] cusNameArray1=new String[2];
-    static String[] cusNameArray2=new String[3];
-    static String[] cusNameArray3=new String[5];
+
     static File logFile = new File("cashier-data.txt");
     static int burgerAmount=50;
     // Queue capacities
     static int queue1Capacity = 2;
     static int queue2Capacity = 3;
     static int queue3Capacity = 5;
+    // Initialize the cashierIncome array with default values of zero
+    static {
+        Arrays.fill(cashierIncome, 0);
+    }
 
 
     // Queue lengths
@@ -32,6 +40,8 @@ public class main {
     //static CustomerQueue[] foodQueues = new CustomerQueue[10]; // assuming CustomerQueue is a class to hold customer details
 
     public static void main(String[] args) {
+/*        //        Set starting value of every pump income to zero
+        Arrays.fill(cashierIncome, 0);*/
 //create foodqueue objects into foodArray
         for (int i = 0; i < foodArray.length; i++) {
             foodArray[i]=new FoodQueue(queueLength);
@@ -65,7 +75,7 @@ public class main {
                     break;
                 case "104":
                 case "PCQ":
-                    //removeServedCustomer();
+                    removeServedCustomer();
                     break;
                 case "105":
                 case "VCS":
@@ -86,6 +96,10 @@ public class main {
                 case "109":
                 case "AFS":
                     addBurgersStock();
+                    break;
+                case "110":
+                case "IFQ":
+                    showQueueIncome();
                     break;
                 case "999":
                 case "EXT":
@@ -110,6 +124,7 @@ public class main {
                 "107 or LPD: Load Program Data from file.\n" +
                 "108 or STK: View Remaining burgers Stock.\n" +
                 "109 or AFS: Add burgers to Stock.\n" +
+                "110 or AFS: View Cashier Income.\n" +
                 "999 or EXT: Exit the Program");
         System.out.println("-------------------------------------");
     }
@@ -312,6 +327,7 @@ public class main {
                 if (selectedIndex <= index) {
                     burgerAmount+=foodQueue.getCustomer(selectedIndex-1).getNoOfBurger();
                     foodQueue.remove(selectedIndex-1);
+                    System.out.println("Successfully removed");
                     break;
                 } else if (selectedIndex == 999) {
                     break;
@@ -326,51 +342,40 @@ public class main {
 
     }
     public static void removeServedCustomer() {
-        try {
-            System.out.println("Enter Cashier Number :");
+        System.out.print("Enter \n1 - 1st Cashier\n2 - 2nd Cashier\n3 - 3rd Cashier\n");
+        try{
+            System.out.print("What Cashier did serve : ");
             int cashNum = scn.nextInt();
-
-            if (cashNum == 1) {
-                if (array1[0] == "O") {
-                    System.out.println("There is no customer in the queue 1");
-                } else {
-                    for (int i = 0; i < 2; i++) {
-                        array1[i] = array1[i + 1];
+            for (int i = 0; i < foodArray.length; i++) {
+                if (cashNum == i+1) {
+                    if (foodArray[i].getNoOfEmpty() < queueLength) {
+                        System.out.println("Cashier " + (i + 1) + " served");
+                        int reqBurgers = foodArray[i].getCustomer(0).getNoOfBurger();
+                        foodArray[i].remove(0);
+                        changeCashierIncome(i,reqBurgers);
                     }
-                    burgerAmount -= 5;
-                    System.out.println("Removed the served customer");
-                }
-            } else if (cashNum == 2) {
-                if (array2[0] == "O") {
-                    System.out.println("There is no customer in the queue 2");
-                } else {
-                    for (int i = 0; i < 3; i++) {
-                        array3[i] = array3[i + 1];
+                    else {
+                        System.out.println("Cashier " + (i + 1) + " is empty");
                     }
-                    burgerAmount -= 5;
-                    System.out.println("Removed the served customer");
                 }
-            } else if (cashNum == 3) {
-                if (array3[0] == "O") {
-                    System.out.println("There is no customer in the queue 3");
-                } else {
-                    for (int i = 0; i < 5; i++) {
-                        array3[i] = array3[i + 1];
-                    }
-                    burgerAmount -= 5;
-                    System.out.println("Removed the served customer");
-                }
-            } else {
-                System.out.println("Invalid Input");
-            }
-            if (burgerAmount <= 10) {
-                System.out.println("****The stock of burgers is running low. Please replenish the stock.****");
             }
 
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("Only integers are allowed");
         }
 
+    }
+    //    show income of every queue
+    private static void showQueueIncome(){
+        for (int i = 0; i < foodArray.length; i++) {
+            int queueIncome = cashierIncome[i]*650;
+            System.out.printf("Income of cashier %d : Rs.%d%n",i+1,queueIncome);
+        }
+    }
+
+    //    Change income value when customer has been served
+    public static void changeCashierIncome(int index, int reqBurgers){
+        cashierIncome[index] += reqBurgers;
     }
     public static void viewEmptyQueues() {
 
