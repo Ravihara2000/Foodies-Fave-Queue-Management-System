@@ -1,8 +1,7 @@
 package task2;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class main {
 
@@ -79,11 +78,11 @@ public class main {
                     break;
                 case "105":
                 case "VCS":
-                    //sortedCustomer();
+                    sortedCustomer();
                     break;
                 case "106":
                 case "SPD":
-                    //storeData();
+                    storeData();
                     break;
                 case "107":
                 case "LPD":
@@ -111,6 +110,33 @@ public class main {
 
         }
 
+    }
+
+    private static void storeData() {
+        
+    }
+
+    private static void sortedCustomer() {
+        for (int i = 0; i < foodArray.length; i++) {
+            ArrayList<Customer> tempQueue = new ArrayList<Customer>();
+            for (int j = 0; j < foodArray[i].size(); j++) {
+                tempQueue.add(foodArray[i].getCustomer(j));
+            }
+            Collections.sort(tempQueue, Comparator.comparing(Customer::getFirstName));
+            if (tempQueue.size() > 0) {
+                System.out.println("----------------------- Cashier "+(i+1)+" [SORTED] -------------------------");
+                System.out.printf("%15s | %15s | %15s\n", "First Name", "Second Name", "Required Burgers");
+                System.out.println("-----------------------------------------------------------------");
+
+                for (Customer passenger:tempQueue
+                ) {
+                    System.out.printf("%15s | %15s | %15s \n", passenger.getFirstName(), passenger.getSecondName(), passenger.getNoOfBurger());
+
+                }
+                System.out.println();
+            }
+
+        }
     }
 
     public static void displayMenu() {
