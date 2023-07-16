@@ -49,10 +49,7 @@ public class main {
         for (int i = 0; i < foodArray.length; i++) {
             foodArray[i]=new FoodQueue(queueLength);
         }
-        int x = 0;
-
-
-        while (x < 1) {
+            for(;;){
             displayMenu();
 
             System.out.println("Enter Your Option  :");
@@ -133,7 +130,7 @@ public class main {
                                 String[] lineData = Files.readAllLines(file).get(j).split(",");
                                 if (lineData.length>1) {
 
-                                    foodArray[i].addCustomerObj(lineData[0], lineData[1], Integer.parseInt(lineData[3]));
+                                    foodArray[i].addCustomerObj(lineData[0], lineData[1], Integer.parseInt(lineData[2]));
                                 }
                             }
                             lineNumber+=queueLength;
