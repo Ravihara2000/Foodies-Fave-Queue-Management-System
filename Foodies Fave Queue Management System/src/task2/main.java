@@ -40,12 +40,10 @@ public class main {
     static int queue1Length = 0;
     static int queue2Length = 0;
     static int queue3Length = 0;
-    //static CustomerQueue[] foodQueues = new CustomerQueue[10]; // assuming CustomerQueue is a class to hold customer details
+    
 
     public static void main(String[] args) {
-/*        //        Set starting value of every cashier income to zero
-        Arrays.fill(cashierIncome, 0);*/
-//create foodqueue objects into foodArray
+
         for (int i = 0; i < foodArray.length; i++) {
             foodArray[i]=new FoodQueue(queueLength);
         }
